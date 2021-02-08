@@ -11,7 +11,7 @@ Boxstax is a user-interactive game where players stack boxes as straight as poss
 Boxstax will utilize js, css, and html to create this frontend game. 
 
 ## Wireframe 
-![Alt text] (/dist/images/wireframe.png)
+![Alt text](/dist/images/wireframe.png)
 
 ## File Structure
 * /dist
