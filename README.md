@@ -32,7 +32,3 @@ Boxstax will utilize js, css, and html to create this frontend game.
 * webpack.dev.js
 * webpack.prod.js
 * README.md
-
-
-
-//testing
