@@ -36,5 +36,14 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/audreyyun/boxstax.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/audreyyun/boxstax/issues"
+  },
+  "homepage": "https://github.com/audreyyun/boxstax#readme"
 }
