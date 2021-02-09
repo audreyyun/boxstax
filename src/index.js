@@ -1,104 +1,115 @@
 import "./styles/index.scss";
-import "./images/yoda-stitch.jpg";
-import canvasExample from "./scripts/canvas";
-import Square from "./scripts/square";
-import { DOMExample } from "./scripts/DOMExample";
-const currentStateObj = {
-  currentExample: null,
-  currentEventListeners: [],
-};
 
-document.querySelector("#canvas-demo").addEventListener("click", startCanvas);
-document.querySelector("#DOM-demo").addEventListener("click", startDOM);
+// document.addEventListener('DOMContentLoaded', function () {
 
-function startDOM() {
-  unregisterEventListeners();
-  clearDemo();
-  currentStateObj.currentExample = "DOMDEMO";
-  DOMExample();
-}
+//   const canvas = document.getElementById('canvas');
+//   const ctx = canvas.getContext('2d');
 
-function startCanvas() {
-  clearDemo();
-  unregisterEventListeners();
-  currentStateObj.currentExample = "CANVASDEMO";
-  const canvas = new canvasExample();
-  canvas.createCanvas();
-  const squares = [new Square(canvas.ctx, canvas.coords, canvas.fillColor)];
 
-  let animating = true;
+//   ctx.beginPath();
+//   ctx.rect(20, 40, 50, 50);
+//   ctx.fillStyle = "#FF0000";
+//   ctx.fill();
+//   ctx.closePath();
 
-  const animation = () => {
-    canvas.clearCanvas();
-    if (animating) squares.forEach((sq) => sq.updateSquare(canvas.fillColor));
-    squares.forEach((sq) => sq.drawSquare());
-    window.requestAnimationFrame(animation);
-    squares.forEach((sq) => {
-      if (sq.coords[0] + sq.coords[2] > window.innerWidth)
-        sq.reverseAnimation();
-      if (sq.coords[0] < 0) sq.reverseAnimation();
-    });
-  };
+//   ctx.beginPath();
+//   ctx.arc(240, 160, 20, 0, Math.PI * 2, false);
+//   ctx.fillStyle = "green";
+//   ctx.fill();
+//   ctx.closePath();
 
-  window.requestAnimationFrame(animation);
+//   ctx.beginPath();
+//   ctx.rect(160, 10, 100, 40);
+//   ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
+//   ctx.stroke();
+//   ctx.closePath();
+//   // ctx.fillStyle = 'green';
+//   // ctx.fillRect(10, 10, 150, 100);
+//   window.ctx = ctx; //just so we have access so we can test
 
-  window.addEventListener("keydown", handleKeyDown);
-  currentStateObj.currentEventListeners.push([
-    "window",
-    "keydown",
-    handleKeyDown,
-  ]);
+// });
 
-  window.addEventListener("mousedown", handleMouseDown);
-  currentStateObj.currentEventListeners.push([
-    "window",
-    "mousedown",
-    handleMouseDown,
-  ]);
 
-  function handleKeyDown(event) {
-    if (event.which === 32) {
-      event.preventDefault();
-      squares.forEach((sq) => sq.reverseAnimation());
-      canvas.setColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+
+// import "./images/yoda-stitch.jpg";
+// import canvasExample from "./scripts/canvas";
+//   // import Square from "./scripts/square";
+//   // import { DOMExample } from "./scripts/DOMExample";
+// // const currentStateObj = {
+// //   currentExample: null,
+// //   currentEventListeners: [],
+// // };
+
+
+// document.querySelector("#canvas-demo").addEventListener("click", startCanvas);
+// document.querySelector("#DOM-demo").addEventListener("click", startDOM);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // const canvas = document.getElementById('myCanvas');
+  // const ctx = canvas.getContext('2d');
+  // let x = canvas.width / 2;
+  // let y = canvas.height - 30;
+  // let dx = 2;
+  // let dy = -2;
+
+
+
+  // function draw() { 
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   drawBox();
+  //   x += dx;
+  //   y += dy;
+  // }
+  
+
+  // function drawBox() { 
+  //   ctx.beginPath();
+  //   ctx.rect(20, 20, 150, 100);
+  //   // ctx.fillStyle = "#0095DD";
+  //   ctx.fill();
+  //   ctx.stroke();
+  // }
+  
+  // let interval = setInterval(draw, 10);
+
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let x = 0;
+  let y = 5;
+  let xSpeed = 2;
+  let ySpeed = 5;
+
+  function drawBox() {
+    requestAnimationFrame(drawBox);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.rect(x, y, 60, 60);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.closePath();
+    x += xSpeed;
+
+    if (x > canvas.width - 60) {
+      xSpeed = -xSpeed;
+    } else if (x < 0) {
+      xSpeed = -xSpeed;
     }
-  }
 
-  function handleMouseDown(event) {
-    event.preventDefault();
-    squares.push(
-      new Square(
-        canvas.ctx,
-        canvas.coords.map((co) => co + 25),
-        canvas.fillColor
-      )
-    );
-    // animating = !animating;
   }
-}
+  //click just make it box move faster left and right
+  canvas.addEventListener('click', (e) => {
+    requestAnimationFrame(drawBox);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    xSpeed = 0;
+    y += ySpeed;
+  }, false);
 
-function unregisterEventListeners() {
-  while (currentStateObj.currentEventListeners.length) {
-    let [
-      selector,
-      event,
-      handler,
-    ] = currentStateObj.currentEventListeners.pop();
-    if (selector === "window") {
-      window.removeEventListener(event, handler);
-      console.log(handler);
-    } else {
-      document.querySelector(selector).removeEventListener(event, handler);
-    }
-  }
-}
+  
 
-function clearDemo() {
-  if (currentStateObj.currentExample === "CANVASDEMO")
-    document.body.removeChild(document.querySelector("canvas"));
-  if (currentStateObj.currentExample === "DOMDEMO") {
-    [...document.querySelectorAll(".card")].forEach((elem) =>
-      document.body.removeChild(elem)
-    );
-  }
-}
+  requestAnimationFrame(drawBox);
+
+});
+
