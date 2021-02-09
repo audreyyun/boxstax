@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let y = 5;
   let xSpeed = 2;
   let ySpeed = 5;
+  let mode = 'unclicked';
 
   function drawBox() {
     requestAnimationFrame(drawBox);
@@ -26,15 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
       xSpeed = -xSpeed;
     }
 
+    if (mode == 'fall') { 
+      dropBox();
+    }
   }
 
   
   canvas.addEventListener('click', (e) => {
-    requestAnimationFrame(drawBox);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    mode = 'fall';
+  }, false);
+
+  function dropBox() { 
+    // requestAnimationFrame(dropBox);
     xSpeed = 0;
     y += ySpeed;
-  }, false);
+
+    if (y > canvas.height - 60) { 
+      y = 540;
+    }
+  }
 
   
 
