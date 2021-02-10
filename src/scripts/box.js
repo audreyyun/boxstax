@@ -1,19 +1,12 @@
 class Box {
     constructor(game) {
-        this.start = {
-            x: 0,
-            y: 5
-        }
-        // this.speed = {
-        //     x: 0,
-        //     y: 2
-        // }
         this.game = game
         this.draw = this.draw.bind(this);
         this.drawBox = this.drawBox.bind(this);
         this.dropBox = this.dropBox.bind(this);
         this.drawTable = this.drawTable.bind(this);
         this.play = this.play.bind(this);
+        this.newBox = this.newBox.bind(this);
     }
 
     draw(ctx) {
@@ -29,10 +22,20 @@ class Box {
         this.game.ctx.closePath;
     }
 
+    newBox() {
+        console.log(this.game.boxes[this.game.current].width)
+        const width = this.game.boxes[this.game.current].width;
+        this.game.boxes[this.game.current] = {
+            x: 0,
+            y: (this.game.current + 10) * this.game.boxHeight,
+            width: this.game.boxes[this.game.current].width
+        };
+    }
+
     move(ctx) {
         this.game.ctx.clearRect(0, 0, 720, 425);
         this.draw(ctx)
-        // this.start.x += this.speed.x;
+
         this.start.x += this.game.xSpeed
         this.start.y += this.game.ySpeed;  
     }
@@ -48,7 +51,7 @@ class Box {
                 this.game.ctx.fillStyle = "#C9FFFF";
                 this.game.ctx.fill();
             }
-            // this.game.current++;
+
             this.game.x += this.game.xSpeed;
 
             if (this.game.x > this.game.canvas.width - 80) {
@@ -60,8 +63,7 @@ class Box {
 
         if (this.game.mode === 'fall') {
             this.dropBox();
-            // this.game.mode = 'waiting';
-            // newBox();
+            this.game.current++;
         }
 
         this.game.canvas.addEventListener('click', (e) => {
@@ -73,13 +75,12 @@ class Box {
 
 
     dropBox() {
-        // requestAnimationFrame(dropBox);
         console.log(this.dropBox)
         this.game.xSpeed = 0;
         this.game.y += this.game.ySpeed;
 
-        if (this.game.y > canvas.height - (this.game.boxHeight + this.game.tableHeight)) {
-            this.game.y = canvas.height - (this.game.boxHeight + this.game.tableHeight);
+        if (this.game.y > this.game.canvas.height - (this.game.boxHeight + this.game.tableHeight)) {
+            this.game.y = this.game.canvas.height - (this.game.boxHeight + this.game.tableHeight);
         }
 
         if (this.game.y === 540) {
@@ -90,7 +91,7 @@ class Box {
 
     play() { 
         console.log('box.play')
-        if (this.game.boxes[this.game.current].y == this.game.boxes[this.game.current - 1].y + this.game.boxHeight) {
+        if (this.game.boxes[this.game.current].y === this.game.boxes[this.game.current - 1].y + this.game.boxHeight) {
             this.game.mode = 'waiting';
             let difference = this.game.boxes[this.game.current].x - this.game.boxes[this.game.current - 1].x;
             if (Math.abs(difference) >= this.game.boxes[this.game.current].width) {
@@ -111,10 +112,9 @@ class Box {
                 this.game.xSpeed -= .2;
             }
 
-            // this.game.current++;
             this.game.score++;
             this.game.windowScroller = this.game.boxHeight;
-            this.game.newBox();
+            this.newBox();
         }
     }
 

@@ -10,13 +10,12 @@ class Game {
         this.box = new Box(this); //allows us to have access to all the other game components
         this.render = this.render.bind(this)
         this.startGame = this.startGame.bind(this)
-        this.newBox = this.newBox.bind(this);
         this.gameOver = this.gameOver.bind(this);
         this.play = this.play.bind(this)
 
         this.windowScroller;
         this.viewScreen = 0;
-        this.current = -1; // go into game component 
+        this.current = 0; // go into game component 
         this.mode = null;
         this.xSpeed = 2;
         this.ySpeed = 5;
@@ -40,10 +39,8 @@ class Game {
         this.displayScore();
         this.mode = 'waiting';
         this.xSpeed = 2;
-        this.current++;
-        this.newBox();
+        this.current = 0;
         this.box.drawBox();
-        //requestanimationframe
     }
 
     render() {
@@ -65,9 +62,7 @@ class Game {
     play() {
         this.startGame();
         console.log('this.play')
-        console.log(this.mode)      
-
-        
+        console.log(this.mode)  
         //change the width of the box
         for (let n = 0; n < this.boxes.length; n++) {
             let box = this.boxes[n];
@@ -91,45 +86,12 @@ class Game {
             this.boxes[this.current].y = this.boxes[this.current].y - this.ySpeed;
             console.log('this.box')
             this.box.play();
-            // if (this.boxes[this.current].y === this.boxes[this.current - 1].y + this.boxHeight) {
-            //     this.mode = 'waiting';
-            //     let difference = this.boxes[this.current].x - this.boxes[this.current - 1].x;
-            //     if (Math.abs(difference) >= this.boxes[this.current].width) {
-            //         this.gameOver();
-            //     }
-
-            //     if (this.boxes[this.current].x > this.boxes[this.current - 1].x) {
-            //         this.boxes[this.current].width = this.boxes[this.current].width - difference;
-
-            //     } else {
-            //         this.boxes[this.current].width = this.boxes[this.current].width + difference;
-            //         this.boxes[this.current].x = this.boxes[this.current - 1].x;
-            //     }
-            //     if (this.xSpeed > 0) {
-            //         this.xSpeed += .2;
-            //     } else {
-            //         this.xSpeed -= .2;
-            //     }
-
-            //     this.current++;
-            //     this.score++;
-            //     this.windowScroller = this.boxHeight;
-            //     this.newBox();
-            // }
         }
 
         if (this.windowScroller) {
             this.viewScreen++;
             this.windowScroller--;
         }
-    }
-
-    newBox() {
-        this.boxes[this.current] = {
-            x: 0,
-            y: (this.current + 10) * this.boxHeight,
-            width: this.boxes[this.current].width
-        };
     }
 
 }
