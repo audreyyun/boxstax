@@ -1,17 +1,30 @@
 class Box {
     constructor(game) {
         this.game = game
-        this.draw = this.draw.bind(this);
         this.drawBox = this.drawBox.bind(this);
         this.dropBox = this.dropBox.bind(this);
         this.drawTable = this.drawTable.bind(this);
         this.play = this.play.bind(this);
         this.newBox = this.newBox.bind(this);
+        this.createBox = this.createBox.bind(this);
+        this.collisionDetection = this.collisionDetection.bind(this)
+
+        this.xSpeed = 2;
+        this.ySpeed = 5;
+        this.boxes = [];
+        this.boxes[0] = {
+            x: 0,
+            y: 595,
+            width: 80
+        };
     }
 
-    draw(ctx) {
-        this.game.ctx.fillStyle = '#C9FFFF';
-        this.game.ctx.fillRect(box.x, 600 - box.y + this.game.viewScreen, box.width, this.game.boxHeight);
+    createBox(ctx) {
+        for (let n = 0; n < this.boxes.length; n++) {
+            let box = this.boxes[n];
+            this.game.ctx.fillStyle = '#C9FFFF';
+            this.game.ctx.fillRect(box.x, (600 - box.y + this.game.viewScreen), box.width, this.game.boxHeight);
+        }
     }
 
     drawTable(ctx) {
@@ -23,42 +36,34 @@ class Box {
     }
 
     newBox() {
-        // console.log(this.game.boxes[this.game.current].width)
-        const width = this.game.boxes[this.game.current].width;
-        this.game.boxes[this.game.current] = {
+        const width = this.boxes[this.game.current].width;
+        this.boxes[this.game.current] = {
             x: 0,
             y: (this.game.current + 10) * this.game.boxHeight,
-            width: this.game.boxes[this.game.current].width
+            width: this.boxes[this.game.current].width
         };
     }
 
-    move(ctx) {
-        this.game.ctx.clearRect(0, 0, 720, 425);
-        this.draw(ctx)
+    // move(ctx) {
+    //     this.game.ctx.clearRect(0, 0, 720, 425);
+    //     this.createBox(ctx)
 
-        this.start.x += this.game.xSpeed
-        this.start.y += this.game.ySpeed;  
-    }
+    //     this.boxes[this.game.current].x += this.xSpeed;
+    //     this.boxes[this.game.current].y += this.ySpeed;  
+    // }
 
     drawBox(ctx) {
         this.drawTable();
         if (this.game.mode === 'waiting') {
 
-            for (let i = 0; i < this.game.boxes.length; i++) {
-                let box = this.game.boxes[i];
+            for (let i = 0; i < this.boxes.length; i++) {
+                let box = this.boxes[i];
                 this.game.ctx.beginPath();
-                this.game.ctx.rect(this.game.x, this.game.y, box.width, this.game.boxHeight);
+                this.game.ctx.rect(this.boxes[this.game.current].x, this.boxes[this.game.current], box.width, this.game.boxHeight);
                 this.game.ctx.fillStyle = "#C9FFFF";
                 this.game.ctx.fill();
             }
 
-            this.game.x += this.game.xSpeed;
-
-            if (this.game.x > this.game.canvas.width - 80) {
-                this.game.xSpeed = -this.game.xSpeed;
-            } else if (this.game.x < 0) {
-                this.game.xSpeed = -this.game.xSpeed;
-            }
         }
 
         if (this.game.mode === 'fall') {
@@ -66,54 +71,71 @@ class Box {
             this.game.current++;
         }
 
-        // this.game.canvas.addEventListener('click', (e) => {
-        //     if (this.game.mode === 'waiting') {
-        //         this.game.mode = 'fall';
-        //     }
-        // }, false);
+    }
+    
+    collisionDetection() {
+        // if (this.xSpeed > 0 && (this.boxes[this.game.current].x + this.boxes[this.game.current].width > this.game.canvas.width)){
+        //     this.xSpeed = -this.xSpeed;
+        //     // this.boxes[this.game.current].x += this.xSpeed;
+        //     // debugger
+        // }
+        // if (this.xSpeed < 0 && this.boxes[this.game.current].x > 0) {
+        //     this.xSpeed = -this.xSpeed;
+        //     // this.boxes[this.game.current].x += this.xSpeed;
+        // }
+        // this.boxes[this.game.current].x += this.xSpeed;
+
+        if (this.boxes[this.game.current].x === this.boxes[this.game.current].width + this.game.canvas.width) { 
+            this.xSpeed = -this.xSpeed;
+            this.boxes[this.game.current].x += this.xSpeed;
+        }
     }
 
-
-    dropBox() {
-        this.game.xSpeed = 0;
-        this.game.y += this.game.ySpeed;
-
-        if (this.game.y > this.game.canvas.height - (this.game.boxHeight + this.game.tableHeight)) {
-            this.game.y = this.game.canvas.height - (this.game.boxHeight + this.game.tableHeight);
-        }
-
-        if (this.game.y === 540) {
+    dropBox() {        
+        // this.xSpeed = 0;
+        // this.boxes[this.game.current].y += this.ySpeed;
+        console.log(this.boxes[this.game.current].y)
+        console.log(this.ySpeed)
+        console.log(this.game.current)
+        // if (this.boxes[this.game.current].y > this.game.canvas.height - this.game.tableHeight) {
+        //     // debugger
+        //     this.boxes[this.game.current].y = this.game.canvas.height - (this.game.boxHeight + this.game.tableHeight);
+        //     this.boxes[this.game.current].y += this.ySpeed;  
+        // }
+        
+        // if ((this.game.current !== 0) && (this.boxes[this.game.current].y === this.boxes[this.game.current - 1].y + this.game.boxHeight)) {
+            this.boxes[this.game.current].y = this.game.canvas.height - (this.game.boxHeight + this.game.tableHeight);
+            this.boxes[this.game.current].y -= this.ySpeed;  
             this.game.mode = 'waiting';
-        }
+        // }
 
     }
 
     play() { 
-        if ((this.game.current !== 0) && (this.game.boxes[this.game.current].y === this.game.boxes[this.game.current - 1].y + this.game.boxHeight)) {
+        // this.boxes[this.game.current].y -= this.ySpeed;
+        // this.collisionDetection();
+        if ((this.game.current !== 0) && (this.boxes[this.game.current].y === this.boxes[this.game.current - 1].y + this.game.boxHeight)) {
             this.game.mode = 'waiting';
-            let difference = this.game.boxes[this.game.current].x - this.game.boxes[this.game.current - 1].x;
-            if (Math.abs(difference) >= this.game.boxes[this.game.current].width) {
+            let difference = this.boxes[this.game.current].x - this.boxes[this.game.current - 1].x;
+            if (Math.abs(difference) >= this.boxes[this.game.current].width) {
                 this.game.gameOver();
             }
-
-            if (this.game.boxes[this.game.current].x > this.game.boxes[this.game.current - 1].x) {
-                this.game.boxes[this.game.current].width = this.game.boxes[this.game.current].width - difference;
-
-            } else {
-                this.game.boxes[this.game.current].width = this.game.boxes[this.game.current].width + difference;
-                this.game.boxes[this.game.current].x = this.game.boxes[this.game.current - 1].x;
+            
+            if (this.boxes[this.game.current].x > this.boxes[this.game.current - 1].x) {
+                this.boxes[this.game.current].width = this.boxes[this.game.current].width - difference;
+                
             }
-
-            if (this.game.xSpeed > 0) {
-                this.game.xSpeed += .2;
-            } else {
-                this.game.xSpeed -= .2;
-            }
-
-            this.game.score++;
-            this.game.windowScroller = this.game.boxHeight;
-            this.newBox();
         }
+        
+        if (this.xSpeed > 0) {
+            this.xSpeed += .2;
+        } else {
+            this.xSpeed -= .2;
+        }
+        this.dropBox();
+        this.game.score++;
+        this.game.windowScroller = this.game.boxHeight;
+        this.newBox(); 
     }
 
 }
