@@ -23,7 +23,7 @@ class Box {
     }
 
     newBox() {
-        console.log(this.game.boxes[this.game.current].width)
+        // console.log(this.game.boxes[this.game.current].width)
         const width = this.game.boxes[this.game.current].width;
         this.game.boxes[this.game.current] = {
             x: 0,
@@ -66,16 +66,15 @@ class Box {
             this.game.current++;
         }
 
-        this.game.canvas.addEventListener('click', (e) => {
-            if (this.game.mode === 'waiting') {
-                this.game.mode = 'fall';
-            }
-        }, false);
+        // this.game.canvas.addEventListener('click', (e) => {
+        //     if (this.game.mode === 'waiting') {
+        //         this.game.mode = 'fall';
+        //     }
+        // }, false);
     }
 
 
     dropBox() {
-        console.log(this.dropBox)
         this.game.xSpeed = 0;
         this.game.y += this.game.ySpeed;
 
@@ -90,8 +89,7 @@ class Box {
     }
 
     play() { 
-        console.log('box.play')
-        if (this.game.boxes[this.game.current].y === this.game.boxes[this.game.current - 1].y + this.game.boxHeight) {
+        if ((this.game.current !== 0) && (this.game.boxes[this.game.current].y === this.game.boxes[this.game.current - 1].y + this.game.boxHeight)) {
             this.game.mode = 'waiting';
             let difference = this.game.boxes[this.game.current].x - this.game.boxes[this.game.current - 1].x;
             if (Math.abs(difference) >= this.game.boxes[this.game.current].width) {

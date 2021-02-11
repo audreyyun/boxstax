@@ -8,10 +8,11 @@ class Game {
         this.ctxHeight = this.canvas.height;
         this.ctxWidth = this.canvas.width;
         this.box = new Box(this); //allows us to have access to all the other game components
-        this.render = this.render.bind(this)
-        this.startGame = this.startGame.bind(this)
+        this.render = this.render.bind(this);
+        this.startGame = this.startGame.bind(this);
         this.gameOver = this.gameOver.bind(this);
-        this.play = this.play.bind(this)
+        this.play = this.play.bind(this);
+        this.falling = this.falling.bind(this);
 
         this.windowScroller;
         this.viewScreen = 0;
@@ -33,9 +34,9 @@ class Game {
     }
 
     startGame() {
-        console.log('this.startgame')
+        // console.log('this.startgame')
         this.box;
-        console.log(this.box)
+        // console.log(this.box)
         this.displayScore();
         this.mode = 'waiting';
         this.xSpeed = 2;
@@ -61,8 +62,8 @@ class Game {
 
     play() {
         this.startGame();
-        console.log('this.play')
-        console.log(this.mode)  
+        // console.log('this.play')
+        // console.log(this.mode)  
         //change the width of the box
         for (let n = 0; n < this.boxes.length; n++) {
             let box = this.boxes[n];
@@ -72,8 +73,8 @@ class Game {
 
         //if the box is moving side to side
         if (this.mode === 'waiting') {
-            console.log(this.current)
-            console.log(this.boxes)
+            // console.log(this.current)
+            // console.log(this.boxes)
             this.boxes[this.current].x = this.boxes[this.current].x + this.xSpeed;
             if (this.xSpeed > 0 && this.boxes[this.current].x + this.boxes[this.current].width > this.canvas.width)
                 this.xSpeed = -this.xSpeed;
@@ -81,16 +82,26 @@ class Game {
                 this.xSpeed = -this.xSpeed;
         }
 
-        //after click, while box is falling 
-        if (this.mode === 'fall') {
-            this.boxes[this.current].y = this.boxes[this.current].y - this.ySpeed;
-            console.log('this.box')
-            this.box.play();
-        }
 
         if (this.windowScroller) {
             this.viewScreen++;
             this.windowScroller--;
+        }
+
+        this.canvas.addEventListener('click', (e) => {
+            if (this.mode === 'waiting') {
+                this.mode = 'fall';
+                this.falling();
+            }
+        }, false);
+    }
+
+    falling() { 
+        //after click, while box is falling 
+        if (this.mode === 'fall') {
+            this.boxes[this.current].y = this.boxes[this.current].y - this.ySpeed;
+            console.log('this.mode')
+            this.box.play();
         }
     }
 
