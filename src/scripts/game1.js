@@ -9,6 +9,7 @@ class Game {
         this.play = this.play.bind(this);
         this.displayScore = this.displayScore.bind(this) 
 
+        this.isPlaying = false;
         this.box = new Box(this);
         this.windowScroller;
         this.viewScreen = 0;
@@ -55,11 +56,12 @@ class Game {
         this.current = 1;
         this.box.boxTemplate();
         this.mode = 'waiting';
+        this.isPlaying = true;
     }
 
     gameOver() {
         alert("GAME OVER. Replay?");
-        
+        this.isPlaying = false;
         document.location.reload();
     }
 
