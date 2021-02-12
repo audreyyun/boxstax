@@ -46,23 +46,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-
-//     let canvas = document.getElementById("myCanvas");
-//     let ctx = canvas.getContext("2d");
-//     let ctxHeight = canvas.height;
-//     let ctxWidth = canvas.width;
-
-//     const game = new Game();
-//     game.startGame();
-    
-//     function gameLoop() {
-//       ctx.clearRect(0, 0, ctxWidth, ctxHeight);
-//       game.play();
-//       requestAnimationFrame(gameLoop);
-//     }
-//     requestAnimationFrame(gameLoop);
-// });
