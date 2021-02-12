@@ -84,7 +84,7 @@ class Game {
         }
 
         if (this.windowScroller) {
-            this.viewScreen++;
+            this.viewScreen+= .95;
             this.windowScroller--;
         }
     }
