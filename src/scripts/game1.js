@@ -38,7 +38,13 @@ class Game {
         // this.ctx.fillText('Score: ' + this.score, 300, 50);
 
         const score = document.getElementById("score");
-        score.innerText = `${this.score}`
+        score.innerText = `Score: ${this.score}`
+
+        const highestScore = document.getElementById("score");
+        // if (this.score > highestScore) { 
+        //     highestScore.innerText = `${this.score}`
+        // }
+
     }
 
     startGame() { // used in index.js

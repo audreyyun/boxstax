@@ -8,6 +8,7 @@
   justify-content: center;
 
 }
+
 .instruction-container-top { 
   margin-top: 140px;
   margin-right: 0;
@@ -16,8 +17,8 @@
   display: flex;
   justify-content: center;
   border: 1px solid black;  
-  
 }
+
 .instruction-content { 
   margin-right: 0;
   width: 400px;
@@ -26,5 +27,8 @@
   flex-direction: column;
   align-items: center;
   border: 1px solid red;  
-  
+}
+
+#instructions { 
+  padding-bottom: 50px;
 }

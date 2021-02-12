@@ -4,6 +4,11 @@ import "./styles/index.scss";
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  
+  document.addEventListener('click', (e) => {
+    document.getElementById("start-game-page").style.display = "none";
+  });
+
   document.addEventListener('keydown', (e) => {
 
     if (e.key === 'Enter') {
@@ -11,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let ctx = canvas.getContext("2d");
       let ctxHeight = canvas.height;
       let ctxWidth = canvas.width;
-      document.getElementById("start-game-page").style.display = "none";
+
 
       const game = new Game();
       game.startGame();

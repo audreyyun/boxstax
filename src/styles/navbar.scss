@@ -17,10 +17,21 @@
         padding-top: 20px;
         font-size: 24px;
         color: black;
-        font-family: SFMono-Regular,Consolas,Liberation;
         i {
+            display: flex;
             width: 100%;
             height: 100%;
+
+            .github {
+                margin-left: 10px;
+                font-family: SFMono-Regular,Consolas,Liberation;
+            }
+        
+            .linkedin {
+                margin-left: 10px;
+                font-family: sans-serif;
+                font-weight: 500;
+            }
         }
     }
 
