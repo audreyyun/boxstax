@@ -2,6 +2,8 @@
 
 Boxstax is a user-interactive game where players stack boxes as straight as possible to achieve the highest height / score. 
 
+Inspired by iamkun's Tower Building Game: https://iamkun.github.io/tower_game/
+
 ## Features: 
   * Click to drop moving box
   * Score counter increasing after successful box drop
