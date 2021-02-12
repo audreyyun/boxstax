@@ -5,8 +5,9 @@ Boxstax is a user-interactive game where players stack boxes as straight as poss
 ## Features: 
   * Click to drop moving box
   * Score counter increasing after successful box drop
-  * Increase speeds after 20 consecutive box drops
-  * If box is not at least 51% on the bottom box, it falls off -  game over.
+  * Slowly increase speeds after each consecutive box drop
+  * If box stacked does not match exactly to the dimensions of the one below, it cuts the width of your future blocks 
+  * Game is over if box is not stacked on top of the previous box 
 
 Boxstax will utilize js, canvas, css, and html to create this frontend game. 
 
@@ -20,7 +21,7 @@ Boxstax will utilize js, canvas, css, and html to create this frontend game.
   * main.js
 
 * /src
-  * assets
+  * images
   * scripts
   * styles
   * index.js
