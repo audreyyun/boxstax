@@ -16,10 +16,10 @@ class Game {
         this.mode = null;
         this.xSpeed = 2;
         this.ySpeed = 5;
+        this.score = 0;
         this.boxes = [];
-        this.score = 0
 
-        this.boxes[0] = {
+        this.boxes[0] = { // the box on the bottom
             x: (this.canvas.width / 2) - 70,
             y: 50,
             width: 125
@@ -49,15 +49,15 @@ class Game {
     }
 
     gameOver() {
-        this.mode = 'gameOver';
         alert("GAME OVER. Replay?");
+        
         document.location.reload();
     }
 
     play() {
+        
         // for this.score
         this.displayScore();
-
         //change the width of the box
         for (let n = 0; n < this.boxes.length; n++) {
             this.box.createBox(this.boxes[n]);
@@ -78,12 +78,6 @@ class Game {
             this.viewScreen++;
             this.windowScroller--;
         }
-
-        // this.canvas.addEventListener('click', (e) => {
-        //     if (this.mode === 'waiting') {
-        //         this.mode = 'fall';
-        //     }
-        // }, false);
     }
 
 };
