@@ -20,7 +20,6 @@ class Box {
     createBox(currentBox) { //necessary because width changes
             let box = currentBox;
             let blockImg = this.boxpic;
-            // this.game.ctx.fillStyle = '#C9FFFF';
             this.game.ctx.drawImage(blockImg, box.x, 600 - box.y + this.game.viewScreen, box.width, 50);
     }
 
