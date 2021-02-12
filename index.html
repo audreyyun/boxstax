@@ -5,45 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" 
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" 
+      crossorigin="anonymous" />
     <title>Boxstax</title>
+    
   </head>
-
+  
   <body>
     <script src="./dist/main.js"></script>
-    <!-- <canvas id="myCanvas"  width="400" height="600"></canvas>
 
-    <div id="instructions">
-      <p>INSTRUCTIONS</p>
-    </div>
-
-    <div id="instruction-background">
-      <div id="instruction-container-top">
-        <div class="instructions-text">
-          <h3>How To  Get Started!</h3>
-          <p>Stack the blocks as tall as possible </p>
+    <div class="page-container"></div>
+      <div class="navbar">
+        <div class="personal-links">
+          <a href="https://github.com/audreyyun">
+            <i class="fab fa-github"> Github</i>
+          </a>
+          <a href="https://linkedin.com/in/audrey-yun">
+            <i class="fab fa-linkedin"> LinkedIn</i>
+          </a>
         </div>
+      
       </div>
-    </div> -->
 
-    <div id="body-container">
-      <div class="side-container">
-        <div id="instructions">
-          <p>How To Play!</p>
+      <div id="body-container">
+        <div class="side-container">
+          <div id="instructions">
+            <p>How To Play!</p>
+          </div>
+
+          <div id="score"></div>
         </div>
-      </div>
-      <div class="game-container">
-        <canvas id="myCanvas" width="400" height="600"></canvas>
-        <div id="start-game-page">
-          <p class="start-game-text">Press "Enter" to start the stacking!</p>
-        </div>
-        <div id="instruction-background">
-          <div id="instruction-container-top">
-            <div class="instructions-text">
-              <h3>How To Get Started!</h3>
-              <p>Stack the blocks as tall as possible </p>
+        <div class="game-container">
+          <canvas id="myCanvas" width="400" height="600"></canvas>
+          <div id="start-game-page">
+            <p class="start-game-text">Press "Enter" to start the stacking!</p>
+          </div>
+          <div id="instruction-background">
+            <div class="instruction-container-top">
+              <div class="instruction-content">
+                <h3>How To Get Started!</h3>
+                <p>Stack the blocks as tall as possible </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </body>
 </html>

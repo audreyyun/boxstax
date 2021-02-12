@@ -5,6 +5,8 @@ class Box {
         this.collisionDetection = this.collisionDetection.bind(this);
         this.createBox = this.createBox.bind(this);
         this.incrementSpeed = this.incrementSpeed.bind(this)
+        this.boxpic = new Image();
+        this.boxpic.src = 'src/images/block.png'
     }
 
     boxTemplate() {
@@ -15,10 +17,11 @@ class Box {
         };
     }
 
-    createBox(currentBox) { 
+    createBox(currentBox) { //necessary because width changes
             let box = currentBox;
-            this.game.ctx.fillStyle = '#C9FFFF';
-            this.game.ctx.fillRect(box.x, 600 - box.y + this.game.viewScreen, box.width, 50);
+            let blockImg = this.boxpic;
+            // this.game.ctx.fillStyle = '#C9FFFF';
+            this.game.ctx.drawImage(blockImg, box.x, 600 - box.y + this.game.viewScreen, box.width, 50);
     }
 
     collisionDetection() { 

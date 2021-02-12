@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let ctx = canvas.getContext("2d");
       let ctxHeight = canvas.height;
       let ctxWidth = canvas.width;
+      document.getElementById("start-game-page").style.display = "none";
 
       const game = new Game();
       game.startGame();
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   instruct.onclick = function () {
-    scroll.style.display = "block";
+    scroll.style.display = "flex";
   }
 
   window.onclick = function (e) {

@@ -33,9 +33,12 @@ class Game {
     }
 
     displayScore() {
-        this.ctx.font = "bold 20px";
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillText('Score: ' + this.score, 300, 50);
+        // this.ctx.font = "bold 20px";
+        // this.ctx.fillStyle = 'black';
+        // this.ctx.fillText('Score: ' + this.score, 300, 50);
+
+        const score = document.getElementById("score");
+        score.innerText = `${this.score}`
     }
 
     startGame() { // used in index.js
