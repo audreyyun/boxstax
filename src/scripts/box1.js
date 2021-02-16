@@ -24,31 +24,37 @@ class Box {
     }
 
     collisionDetection() { 
-        this.game.boxes[this.game.current].x = this.game.boxes[this.game.current].x + this.game.xSpeed;
-        if (this.game.xSpeed > 0 && this.game.boxes[this.game.current].x + this.game.boxes[this.game.current].width > this.game.canvas.width){
+        let currentBox = this.game.boxes[this.game.current];
+        currentBox.x = currentBox.x + this.game.xSpeed;
+        if (this.game.xSpeed > 0 && currentBox.x + currentBox.width > this.game.canvas.width){
             this.game.xSpeed = -this.game.xSpeed;
         }
-        if (this.game.xSpeed < 0 && this.game.boxes[this.game.current].x < 0) {
+        if (this.game.xSpeed < 0 && currentBox.x < 0) {
             this.game.xSpeed = -this.game.xSpeed;
         }
     }
 
     boxFalling() {
-        this.game.boxes[this.game.current].x = this.game.boxes[this.game.current].x - this.game.xSpeed;
-        this.game.boxes[this.game.current].y = this.game.boxes[this.game.current].y - this.game.ySpeed;
-        if (this.game.boxes[this.game.current].y == this.game.boxes[this.game.current - 1].y + 50) {
+        let currentBox = this.game.boxes[this.game.current];
+        let lastBox = this.game.boxes[this.game.current - 1];
+
+        currentBox.x = currentBox.x - this.game.xSpeed;
+        currentBox.y = currentBox.y - this.game.ySpeed;
+
+        if (currentBox.y == lastBox.y + 50) {
             this.game.mode = 'waiting';
-            let difference = this.game.boxes[this.game.current].x - this.game.boxes[this.game.current - 1].x;
-            if (Math.abs(difference) >= this.game.boxes[this.game.current].width) {
+            let difference = currentBox.x - lastBox.x;
+            
+            if (Math.abs(difference) >= currentBox.width) {
                 this.game.gameOver();
             }
 
-            if (this.game.boxes[this.game.current].x > this.game.boxes[this.game.current - 1].x) {
-                this.game.boxes[this.game.current].width = this.game.boxes[this.game.current].width - difference;
+            if (currentBox.x > lastBox.x) {
+                currentBox.width = currentBox.width - difference;
 
             } else {
-                this.game.boxes[this.game.current].width = this.game.boxes[this.game.current].width + difference;
-                this.game.boxes[this.game.current].x = this.game.boxes[this.game.current - 1].x;
+                currentBox.width = currentBox.width + difference;
+                currentBox.x = lastBox.x;
             }
 
             this.incrementSpeed();

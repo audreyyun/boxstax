@@ -13,7 +13,7 @@ class Game {
         this.box = new Box(this);
         this.windowScroller;
         this.viewScreen = 0;
-        this.current = null; // go into game component 
+        this.current = null;
         this.mode = null;
         this.xSpeed = 2;
         this.ySpeed = 5;
@@ -34,9 +34,6 @@ class Game {
     }
 
     displayScore() {
-        // this.ctx.font = "bold 20px";
-        // this.ctx.fillStyle = 'black';
-        // this.ctx.fillText('Score: ' + this.score, 300, 50);
 
         const score = document.getElementById("score");
         score.innerText = `Score: ${this.score}`
