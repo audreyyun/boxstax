@@ -42,11 +42,24 @@ class Box {
         currentBox.y = currentBox.y - this.game.ySpeed;
 
         if (currentBox.y === lastBox.y + 50) {
+            
             this.game.mode = 'waiting';
             let difference = currentBox.x - lastBox.x;
-
-            if (difference > (0.6*lastBox.width)) { 
+            
+            if (Math.abs(difference) >= currentBox.width) {
                 this.game.gameOver();
+            }
+            
+            if (difference > (0.6 * lastBox.width)) {
+                this.game.gameOver();
+            }
+            
+            if (currentBox.x > lastBox.x) {
+                currentBox.width = currentBox.width - difference;
+                
+            } else {
+                currentBox.width = currentBox.width + difference;
+                currentBox.x = lastBox.x;
             }
             this.incrementSpeed();
 
