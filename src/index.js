@@ -5,37 +5,27 @@ import "./styles/index.scss";
 
 document.addEventListener('DOMContentLoaded', () => {
   
+  let canvas = document.getElementById("myCanvas");
+  let ctx = canvas.getContext("2d");
+  let ctxHeight = canvas.height;
+  let ctxWidth = canvas.width;
+  
+  const game = new Game();
   document.addEventListener('click', (e) => {
     document.getElementById("start-game-page").style.display = "none";
-    
-    let canvas = document.getElementById("myCanvas");
-    let ctx = canvas.getContext("2d");
-    let ctxHeight = canvas.height;
-    let ctxWidth = canvas.width;
   
-  
-    const game = new Game();
+});
 
-    // document.addEventListener('keydown', (e) => {
-  
-      // if (e.key === 'Enter' && game.isPlaying === false) {
-      // if (game.isPlaying === false ) { 
-      document.getElementById('start').addEventListener("click", () => {
+document.getElementById('start').addEventListener("click", () => {
+    game.startGame();
 
-        game.startGame();
-  
-        function gameLoop() {
-          ctx.clearRect(0, 0, ctxWidth, ctxHeight);
-          game.play();
-          requestAnimationFrame(gameLoop);
-        }
-        requestAnimationFrame(gameLoop);
-      })
-      // }
-      // }
-  
-    // });
-  });
+    function gameLoop() {
+      ctx.clearRect(0, 0, ctxWidth, ctxHeight);
+      game.play();
+      requestAnimationFrame(gameLoop);
+    }
+    requestAnimationFrame(gameLoop);
+});
 
 
 
