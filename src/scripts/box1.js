@@ -50,10 +50,6 @@ class Box {
                 this.game.gameOver();
             }
             
-            if (difference > (0.6 * lastBox.width)) {
-                this.game.gameOver();
-            }
-            
             if (currentBox.x > lastBox.x) {
                 currentBox.width = currentBox.width - difference;
                 

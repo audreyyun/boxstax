@@ -15,9 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
     const game = new Game();
-    document.addEventListener('keydown', (e) => {
+
+    // document.addEventListener('keydown', (e) => {
   
-      if (e.key === 'Enter' && game.isPlaying === false) {
+      // if (e.key === 'Enter' && game.isPlaying === false) {
+      // if (game.isPlaying === false ) { 
+      document.getElementById('start').addEventListener("click", () => {
+
         game.startGame();
   
         function gameLoop() {
@@ -26,9 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
           requestAnimationFrame(gameLoop);
         }
         requestAnimationFrame(gameLoop);
-      }
+      })
+      // }
+      // }
   
-    });
+    // });
   });
 
 
