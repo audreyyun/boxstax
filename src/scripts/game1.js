@@ -53,6 +53,7 @@ class Game {
         this.current = 1;
         this.box.boxTemplate();
         this.mode = 'waiting';
+        this.isPlaying = true;
     }
 
     gameOver() {
@@ -81,7 +82,7 @@ class Game {
         }
 
         if (this.windowScroller) {
-            this.viewScreen+= .95;
+            this.viewScreen+= 1;
             this.windowScroller--;
         }
     }

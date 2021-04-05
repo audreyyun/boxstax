@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('start').addEventListener("click", () => {
+debugger
+  if (game.isPlaying === false) { 
     game.startGame();
 
     function gameLoop() {
@@ -25,6 +27,7 @@ document.getElementById('start').addEventListener("click", () => {
       requestAnimationFrame(gameLoop);
     }
     requestAnimationFrame(gameLoop);
+  }
 });
 
 
@@ -37,9 +40,13 @@ document.getElementById('start').addEventListener("click", () => {
     scroll.style.display = "flex";
   }
 
-  window.onclick = function (e) {
-    if (e.target === scroll) {
+  // window.onclick = function (e) {
+  //   if (e.target === scroll) {
+  //     scroll.style.display = "none";
+  //   }
+  // }
+
+  document.getElementById('x').addEventListener("click", () => { 
       scroll.style.display = "none";
-    }
-  }
+  })
 });
