@@ -54,6 +54,20 @@
     border: 1px solid pink;
     padding: 10px 20px;
     margin-bottom: 50px;
+    border-radius: 4px;
+    margin-top: 50px;
+  }
+  #start:hover { 
+    background-color: pink;
+    border: 1px solid rgb(255, 173, 186);
+    padding: 10px 20px;
+    margin-bottom: 50px;
+  }
+  
+  #start:focus { 
+    text-decoration: none;
+    border: none;
+    outline: none;
   }
 }
 

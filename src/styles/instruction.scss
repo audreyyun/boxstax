@@ -42,8 +42,11 @@
   p { 
     font-size: 20px;
   }
-}
 
-#instructions { 
-  padding-bottom: 50px;
+  #x { 
+    width: 100%;
+    display: flex;
+    padding-top: 12px;
+    color: rgb(255, 133, 133)
+  }
 }
